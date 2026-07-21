@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "history_window_size": 8,
+    "matching_window_size": 8,
+    "prediction_confidence": 0.75,
+    "smoothing_alpha": 0.5,
+    "fiwi_threshold": 2.0
+  },
+  "functions": [
+    {"name": "image-resize", "base": "debian", "runtime": "python-3.12", "dependencies": ["pillow", "numpy"], "load_costs": {"pillow": 1.8, "numpy": 2.4}, "base_cost": 4.0, "runtime_cost": 2.0},
+    {"name": "thumbnail", "base": "debian", "runtime": "python-3.12", "dependencies": ["pillow"], "load_costs": {"pillow": 1.8}, "base_cost": 4.0, "runtime_cost": 2.0},
+    {"name": "sentiment", "base": "debian", "runtime": "python-3.12", "dependencies": ["numpy", "vader"], "load_costs": {"numpy": 2.4, "vader": 0.7}, "base_cost": 4.0, "runtime_cost": 2.0}
+  ],
+  "replicas": [
+    {"name": "pool-python-pillow", "base": "debian", "runtime": "python-3.12", "dependencies": ["pillow"], "memory_mb": 180},
+    {"name": "pool-python-numpy", "base": "debian", "runtime": "python-3.12", "dependencies": ["numpy"], "memory_mb": 210}
+  ]
+}

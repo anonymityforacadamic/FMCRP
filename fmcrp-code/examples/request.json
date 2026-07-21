@@ -1,0 +1,5 @@
+{
+  "function": "image-resize",
+  "rates": {"image-resize": 0.8, "thumbnail": 1.6, "sentiment": 0.2},
+  "predicted_counts": {"image-resize": 1, "thumbnail": 2, "sentiment": 1}
+}

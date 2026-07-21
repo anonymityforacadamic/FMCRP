@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fmcrp-controller
+  namespace: fmcrp
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: fmcrp-controller}
+  template:
+    metadata:
+      labels: {app: fmcrp-controller}
+    spec:
+      containers:
+        - name: controller
+          image: fmcrp-controller:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /healthz, port: 8080}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fmcrp-controller
+  namespace: fmcrp
+spec:
+  selector: {app: fmcrp-controller}
+  ports: [{port: 8080, targetPort: 8080}]
